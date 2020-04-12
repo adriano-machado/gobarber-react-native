@@ -1,27 +1,30 @@
 import { all, takeLatest, call, put } from 'redux-saga/effects';
-import { toast } from 'react-toastify';
+import { Alert } from 'react-native';
 import api from '~/services/api';
 
 import { updateProfileSuccess, updateProfileFailure } from './actions';
 
 export function* updateProfile({ payload }) {
-    try {
-        const { name, email, avatar_id, ...rest } = payload.data;
-        const profile = {
-            name,
-            email,
-            avatar_id,
-            ...(rest.oldPassword ? rest : {}),
-        };
+  try {
+    const { name, email, avatar_id, ...rest } = payload.data;
+    const profile = {
+      name,
+      email,
+      avatar_id,
+      ...(rest.oldPassword ? rest : {}),
+    };
 
-        const response = yield call(api.put, 'users', profile);
+    const response = yield call(api.put, 'users', profile);
+    Alert.alert('Sucesso', 'Perfil atualizado com sucesso!');
 
-        toast.success('Perfil atualizado com sucesso!');
+    yield put(updateProfileSuccess(response.data));
+  } catch (err) {
+    Alert.alert(
+      'Falha na atualização',
+      'Houve um erro na atualização do perfil, verifique seus dados'
+    );
 
-        yield put(updateProfileSuccess(response.data));
-    } catch (err) {
-        toast.error('Erro ao atualizar perfil, confira seus dados!');
-        yield put(updateProfileFailure());
-    }
+    yield put(updateProfileFailure());
+  }
 }
 export default all([takeLatest('@user/UPDATE_PROFILE_REQUEST', updateProfile)]);
