@@ -10,8 +10,6 @@ import SignUp from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 
-// const AuthStack = createStackNavigator();
-
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 export default function Routes({ signed }) {
