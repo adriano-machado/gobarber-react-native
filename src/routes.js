@@ -4,7 +4,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
 import PropTypes from 'prop-types';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
@@ -46,8 +45,25 @@ function NewStackNavigator({ navigation }) {
       <NewAppointmentStack.Screen
         name="SelectDateTime"
         component={SelectDateTime}
+        options={{
+          title: 'Selecione o horário',
+          headerBackImage: () => (
+            <Icon name="chevron-left" size={20} color="#FFF" />
+          ),
+          headerBackTitleVisible: false,
+        }}
       />
-      <NewAppointmentStack.Screen name="Confirm" component={Confirm} />
+      <NewAppointmentStack.Screen
+        name="Confirm"
+        component={Confirm}
+        options={{
+          title: 'Confirmar',
+          headerBackImage: () => (
+            <Icon name="chevron-left" size={20} color="#FFF" />
+          ),
+          headerBackTitleVisible: false,
+        }}
+      />
     </NewAppointmentStack.Navigator>
   );
 }
@@ -114,4 +130,11 @@ export default function Routes({ signed }) {
 
 Routes.propTypes = {
   signed: PropTypes.bool.isRequired,
+};
+
+NewStackNavigator.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+    goBack: PropTypes.func,
+  }).isRequired,
 };
