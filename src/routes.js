@@ -14,8 +14,7 @@ import Profile from './pages/Profile';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-function Routes({ signed }) {
-  console.tron.log(signed);
+export default function Routes({ signed }) {
   return (
     <NavigationContainer>
       {signed ? (
@@ -63,8 +62,6 @@ function Routes({ signed }) {
     </NavigationContainer>
   );
 }
-
-export default Routes;
 
 Routes.propTypes = {
   signed: PropTypes.bool.isRequired,
