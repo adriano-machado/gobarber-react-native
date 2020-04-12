@@ -57,7 +57,7 @@ function NewStackNavigator({ navigation }) {
         name="Confirm"
         component={Confirm}
         options={{
-          title: 'Confirmar',
+          title: 'Confirmar agendamento',
           headerBackImage: () => (
             <Icon name="chevron-left" size={20} color="#FFF" />
           ),
@@ -95,6 +95,7 @@ export default function Routes({ signed }) {
             name="SelectProvider"
             component={NewStackNavigator}
             options={{
+              unmountOnBlur: true,
               tabBarVisible: false,
               tabBarLabel: 'Agendar',
               tabBarIcon: ({ color }) => (
